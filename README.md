@@ -22,7 +22,16 @@ fsrs-lapses: 0
 
 ## Installation
 
-Requires Bun. Clone into `<vault>/.obsidian/plugins/obsidian-note-reviewer/`:
+### BRAT (recommended)
+
+1. Install [BRAT](https://obsidian.md/plugins?id=obsidian42-brat) via the community plugin browser
+2. Open **BRAT -> Add Beta plugin**
+3. Paste this repo URL: `https://github.com/zhuangjiawei/obsidian-note-reviewer`
+4. Enable **Note Reviewer** in **Settings -> Community plugins**
+
+### Manual
+
+Requires [Bun](https://bun.sh). Clone into `<vault>/.obsidian/plugins/obsidian-note-reviewer/`:
 
 ```bash
 bun install
@@ -45,24 +54,6 @@ Open a note, read it, then rate it with one of four commands:
 Go to **Settings -> Hotkeys** and bind these to your preferred keys.
 
 On first rating, the plugin injects all 9 FSRS fields into the note's YAML frontmatter. On subsequent ratings, those fields are updated. Body text is never touched.
-
-## How it works
-
-| Step               | What happens                                                       |
-| ------------------ | ------------------------------------------------------------------ |
-| Rate active note   | Plugin reads `app.metadataCache.getFileCache(file).frontmatter`    |
-| Compute next state | `fsrs.js` takes (current state, rating) and returns new state      |
-| Write back         | `app.fileManager.processFrontMatter()` updates only the YAML block |
-
-No disk reads. No file IDs. No external database.
-
-## Build
-
-```bash
-bun install          # install deps
-bun run dev          # watch mode
-bun run build        # production build
-```
 
 ## License
 
