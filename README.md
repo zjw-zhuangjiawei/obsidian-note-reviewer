@@ -12,6 +12,11 @@ fsrs-due: '2026-05-20T08:00:00.000Z'
 fsrs-state: 2
 fsrs-stability: 3.42
 fsrs-difficulty: 0.23
+fsrs-last-review: '2026-05-18T08:00:00.000Z'
+fsrs-scheduled-days: 2
+fsrs-elapsed-days: 0
+fsrs-reps: 3
+fsrs-lapses: 0
 ---
 ```
 
@@ -39,7 +44,7 @@ Open a note, read it, then rate it with one of four commands:
 
 Go to **Settings -> Hotkeys** and bind these to your preferred keys.
 
-On first rating, the plugin injects `fsrs-due`, `fsrs-state`, `fsrs-stability`, and `fsrs-difficulty` into the note's YAML frontmatter. On subsequent ratings, those fields are updated. Body text is never touched.
+On first rating, the plugin injects all 9 FSRS fields into the note's YAML frontmatter. On subsequent ratings, those fields are updated. Body text is never touched.
 
 ## How it works
 

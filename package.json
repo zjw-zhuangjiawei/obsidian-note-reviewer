@@ -18,7 +18,7 @@
     "fsrs",
     "spaced-repetition"
   ],
-  "license": "0-BSD",
+  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "9.30.1",
     "@types/node": "^16.11.6",
