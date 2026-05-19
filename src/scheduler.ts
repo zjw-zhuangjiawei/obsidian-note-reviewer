@@ -1,4 +1,4 @@
-import { type TFile, type MetadataCache } from 'obsidian';
+import { type TFile, type MetadataCache, Notice } from 'obsidian';
 import { type FsrsFrontMatter, FsrsRating } from './types';
 import { computeNextState } from './fsrs-engine';
 
@@ -63,5 +63,9 @@ export class Scheduler {
       frontmatter['fsrs-reps'] = nextState['fsrs-reps'];
       frontmatter['fsrs-lapses'] = nextState['fsrs-lapses'];
     });
+
+    const ratingName = FsrsRating[rating];
+    const dueDate = new Date(nextState['fsrs-due']).toLocaleDateString();
+    new Notice(`Rated: ${ratingName} — Next review: ${dueDate}`);
   }
 }
