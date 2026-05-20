@@ -81,7 +81,15 @@ No other commands. No ribbon icon. No settings tab. No custom views.
 
 - `bun run build` — type-checks then bundles to `main.js`.
 - `manifest.json` id: `obsidian-note-reviewer`.
-- Bump `version` in `manifest.json`, update `versions.json`.
+
+### Version bump and release routine
+
+1. Update `version` in `package.json` (e.g. `1.0.0` -> `1.1.0`).
+2. Run `bun run version` — this bumps `manifest.json` and `versions.json` automatically. Check `versions.json` gets the new entry; the script skips adding it if `minAppVersion` hasn't changed, so add it manually when needed.
+3. Run `bun run build` to produce fresh `main.js`.
+4. Commit (`git add` all changed source + manifest + package + versions), push.
+5. Tag without `v` prefix: `git tag 1.1.0`, push `--tags`.
+6. Create release: `gh release create 1.1.0 main.js manifest.json styles.css --title "1.1.0"`.
 
 ## Coding conventions
 
