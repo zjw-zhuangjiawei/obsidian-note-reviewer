@@ -1,6 +1,6 @@
 {
   "name": "obsidian-note-reviewer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "FSRS-based note reviewer for Obsidian. Treats whole notes as review units with state stored in YAML frontmatter.",
   "main": "main.js",
   "type": "module",

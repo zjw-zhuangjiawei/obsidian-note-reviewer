@@ -35,7 +35,6 @@ export function computeNextState(
   card.scheduled_days = current['fsrs-scheduled-days'] ?? 0;
   card.reps = current['fsrs-reps'] ?? 0;
   card.lapses = current['fsrs-lapses'] ?? 0;
-  card.learning_steps = current['fsrs-learning-steps'] ?? 0;
   if (lastReviewStr) card.last_review = new Date(lastReviewStr);
 
   const result = f.next(card, now, RATING_MAP[rating]);
@@ -49,7 +48,6 @@ export function computeNextState(
     'fsrs-last-review': c.last_review ? c.last_review.toISOString() : now.toISOString(),
     'fsrs-scheduled-days': c.scheduled_days,
     'fsrs-elapsed-days': c.elapsed_days,
-    'fsrs-learning-steps': c.learning_steps,
     'fsrs-reps': c.reps,
     'fsrs-lapses': c.lapses,
   };

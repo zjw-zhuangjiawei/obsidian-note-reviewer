@@ -20,7 +20,6 @@ export interface FsrsFrontMatter {
   'fsrs-last-review': string;
   'fsrs-scheduled-days': number;
   'fsrs-elapsed-days': number;
-  'fsrs-learning-steps': number;
   'fsrs-reps': number;
   'fsrs-lapses': number;
 }
