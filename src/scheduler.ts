@@ -45,6 +45,10 @@ export class Scheduler {
         typeof currentFm['fsrs-elapsed-days'] === 'number'
           ? currentFm['fsrs-elapsed-days']
           : undefined,
+      'fsrs-learning-steps':
+        typeof currentFm['fsrs-learning-steps'] === 'number'
+          ? currentFm['fsrs-learning-steps']
+          : undefined,
       'fsrs-reps': typeof currentFm['fsrs-reps'] === 'number' ? currentFm['fsrs-reps'] : undefined,
       'fsrs-lapses':
         typeof currentFm['fsrs-lapses'] === 'number' ? currentFm['fsrs-lapses'] : undefined,
@@ -60,6 +64,7 @@ export class Scheduler {
       frontmatter['fsrs-last-review'] = nextState['fsrs-last-review'];
       frontmatter['fsrs-scheduled-days'] = nextState['fsrs-scheduled-days'];
       frontmatter['fsrs-elapsed-days'] = nextState['fsrs-elapsed-days'];
+      frontmatter['fsrs-learning-steps'] = nextState['fsrs-learning-steps'];
       frontmatter['fsrs-reps'] = nextState['fsrs-reps'];
       frontmatter['fsrs-lapses'] = nextState['fsrs-lapses'];
     });

@@ -1,10 +1,10 @@
 {
-	"id": "obsidian-note-reviewer",
-	"name": "Note Reviewer",
-	"version": "1.1.0",
-	"minAppVersion": "0.15.0",
-	"description": "FSRS-based spaced repetition reviewing whole notes via YAML frontmatter.",
-	"author": "Zhuang Jiawei",
-	"authorUrl": "",
-	"isDesktopOnly": false
+  "id": "obsidian-note-reviewer",
+  "name": "Note Reviewer",
+  "version": "1.1.1",
+  "minAppVersion": "0.15.0",
+  "description": "FSRS-based spaced repetition reviewing whole notes via YAML frontmatter.",
+  "author": "Zhuang Jiawei",
+  "authorUrl": "",
+  "isDesktopOnly": false
 }

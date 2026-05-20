@@ -1,22 +1,17 @@
-import { Card, FSRS, Rating, State } from 'fsrs.js';
+import { fsrs, createEmptyCard, Rating, State, type Card, type Grade } from 'ts-fsrs';
 import { FsrsRating, FsrsState, type FsrsFrontMatter } from './types';
 
-const fsrs = new FSRS();
-fsrs.p.request_retention = 0.9;
-fsrs.p.maximum_interval = 36500;
+const f = fsrs({
+  request_retention: 0.9,
+  maximum_interval: 36500,
+  enable_short_term: false,
+});
 
-const RATING_MAP: Record<FsrsRating, Rating> = {
+const RATING_MAP: Record<FsrsRating, Grade> = {
   [FsrsRating.Again]: Rating.Again,
   [FsrsRating.Hard]: Rating.Hard,
   [FsrsRating.Good]: Rating.Good,
   [FsrsRating.Easy]: Rating.Easy,
-};
-
-const STATE_MAP: Record<number, State> = {
-  [FsrsState.New]: State.New,
-  [FsrsState.Learning]: State.Learning,
-  [FsrsState.Review]: State.Review,
-  [FsrsState.Relearning]: State.Relearning,
 };
 
 /**
@@ -31,19 +26,19 @@ export function computeNextState(
   const dueStr = current['fsrs-due'];
   const lastReviewStr = current['fsrs-last-review'];
 
-  const card = new Card();
-  card.due = dueStr ? new Date(dueStr) : now;
-  card.state = STATE_MAP[current['fsrs-state'] ?? FsrsState.New] ?? State.New;
+  const card = createEmptyCard(now);
+  if (dueStr) card.due = new Date(dueStr);
+  card.state = current['fsrs-state'] !== undefined ? (current['fsrs-state'] as State) : State.New;
   card.stability = current['fsrs-stability'] ?? 0;
   card.difficulty = current['fsrs-difficulty'] ?? 0;
   card.elapsed_days = current['fsrs-elapsed-days'] ?? 0;
   card.scheduled_days = current['fsrs-scheduled-days'] ?? 0;
   card.reps = current['fsrs-reps'] ?? 0;
   card.lapses = current['fsrs-lapses'] ?? 0;
-  card.last_review = lastReviewStr ? new Date(lastReviewStr) : now;
+  card.learning_steps = current['fsrs-learning-steps'] ?? 0;
+  if (lastReviewStr) card.last_review = new Date(lastReviewStr);
 
-  const scheduling = fsrs.repeat(card, now);
-  const result = scheduling[RATING_MAP[rating]]!;
+  const result = f.next(card, now, RATING_MAP[rating]);
   const c = result.card;
 
   return {
@@ -51,9 +46,10 @@ export function computeNextState(
     'fsrs-state': c.state as number,
     'fsrs-stability': c.stability,
     'fsrs-difficulty': c.difficulty,
-    'fsrs-last-review': c.last_review.toISOString(),
+    'fsrs-last-review': c.last_review ? c.last_review.toISOString() : now.toISOString(),
     'fsrs-scheduled-days': c.scheduled_days,
     'fsrs-elapsed-days': c.elapsed_days,
+    'fsrs-learning-steps': c.learning_steps,
     'fsrs-reps': c.reps,
     'fsrs-lapses': c.lapses,
   };
